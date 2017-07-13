@@ -1,0 +1,25 @@
+{
+  "name": "bring-your-own-backend",
+  "version": "1.0.0",
+  "description": "exercise in building out a backend",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Adamj1232/Build-Your-Own-Backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Adamj1232/Build-Your-Own-Backend/issues"
+  },
+  "homepage": "https://github.com/Adamj1232/Build-Your-Own-Backend#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "knex": "^0.13.0",
+    "pg": "^6.4.0"
+  }
+}
