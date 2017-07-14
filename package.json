@@ -4,7 +4,7 @@
   "description": "exercise in building out a backend",
   "main": "server.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha",
+    "test": "mocha test/routes.spec.js",
     "start": "node server.js"
   },
   "repository": {
