@@ -10,4 +10,4 @@ deployment:
   production:
     branch: master
     heroku:
-      appname: byob
+      appname: b-y-o-b
