@@ -284,6 +284,76 @@ app.delete('/api/v1/venues/:venue_name', checkAuth, (req, res) => {
 });
 
 
+app.put('/api/v1/venues', checkAuth (req, res) => {
+  let newVenue = req.body;
+
+  const expectedReq = ["venue_name", "city_name", "state_name"];
+  const isMissing = expectedReq.every(param => req.body[param]);
+
+  if (!isMissing) {
+    return response.status(422).send({ error: 'Missing information from post request body, your request must contain a venue_name, city_name and stat_name to be processed' });
+  }
+
+  database("venues").where(database.raw('lower("venue_name")'), newVenue.venue_name.toLowerCase()).select()
+  .then((data) => {
+    if (!data.length) {
+      res.status(404).send({ error: 'Invalid Venue Name' });
+    } else {
+      if(newVenue.city_name !== data[0].city_name){
+        database("cities").where(database.raw('lower("city_name")'), newVenue.city_name.toLowerCase()).select()
+        .then(stateRes => {
+          if(!stateRes.length){
+            database("cities").insert({
+              state: newVenue.state_name,
+              city_name: newVenue.city_name
+            }, 'id')
+            .then((res) => {
+              database("venues").where('venue_name', data[0].venue_name)
+              .update({
+                // venue_name: newVenue.venue_name,
+                venue_URL: newVenue.venue_URL,
+                venue_booking: newVenue.venue_booking,
+                venue_phone: newVenue.venue_phone,
+                venue_booking_contact: newVenue.venue_booking_contact,
+                venue_PA_status: newVenue.venue_PA_status,
+                venue_comments: newVenue.venue_comments,
+                city_id: res[0]
+              })
+            })
+            .then(() => {
+              res.status(201).send({
+                success: `${newVenue.venue_name}, in ${newVenue.city_name}, ${newVenue.state_name} has been added`
+              })
+            }).catch((error) => {
+              res.status(500)
+            });
+          }
+        })
+      } else {
+        database("venues").where('venue_name', data[0].venue_name)
+        .update({
+          id: data[0].id,
+          venue_name: newVenue.venue_name,
+          venue_URL: newVenue.venue_URL,
+          venue_booking: newVenue.venue_booking,
+          venue_phone: newVenue.venue_phone,
+          venue_booking_contact: newVenue.venue_booking_contact,
+          venue_PA_status: newVenue.venue_PA_status,
+          venue_comments: newVenue.venue_comments,
+        }, 'id')
+        .then((id) => {
+          console.log(id);
+          res.status(201).send({
+            success: `${newVenue.venue_name}, in ${newVenue.city_name}, ${newVenue.state_name} has been added`
+          })
+        }).catch((error) => {
+          res.status(500)
+        });
+      }
+    }
+  })
+})
+
 // app.put('/api/v1/venues', checkAuth (req, res) => {
 //   let newVenue = req.body;
 //
@@ -297,14 +367,14 @@ app.delete('/api/v1/venues/:venue_name', checkAuth, (req, res) => {
 //     if (!data.length) {
 //       res.status(404).send({ error: 'Invalid Venue Name' });
 //     } else {
-//       if(newVenue.city_name !== data[0].city_name){
-//         database("cities").where(database.raw('lower("city_name")'), newVenue.city_name.toLowerCase()).select()
-//         .then(stateRes => {
-//           if(!stateRes.length){
-//             database("cities").insert({
-//               state: newVenue.state_name,
-//               city_name: newVenue.city_name
-//             }, 'id')
+      // if(newVenue.city_name !== data[0].city_name){
+      //   database("cities").where(database.raw('lower("city_name")'), newVenue.city_name.toLowerCase()).select()
+      //   .then(stateRes => {
+      //     if(!stateRes.length){
+      //       database("cities").insert({
+      //         state: newVenue.state_name,
+      //         city_name: newVenue.city_name
+      //       }, 'id')
 //             .then((res) => {
 //               console.log(res[0], data[0].venue_name);
 //               database("venues").where('venue_name', data[0].venue_name)

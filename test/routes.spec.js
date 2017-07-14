@@ -8,8 +8,6 @@ const environment = "test"
 const configuration = require("../knexfile")[environment]
 const database = require("knex")(configuration)
 
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InN1cGVyLXNlY3JldCIsInBhc3N3b3JkIjoic3VwZXItc2VjcmV0IiwiaWF0IjoxNDk5OTk2ODY3LCJleHAiOjE1MDIwMjE4Njd9.joru4co5YCxpAassmd4BFqldWEqOflWL_f0F-ywHe_Q"
-
 chai.use(chaiHttp)
 
 
@@ -173,7 +171,7 @@ describe("API Routes", () => {
     it("return 422 for post because of invalid information set", (done) => {
       chai.request(server)
       .post("/api/v1/venues")
-      .set('authorization', token)
+      .set('authorization', process.env.TOKEN)
       .send({
         venue_name: "super sweet venue",
         city_name: "denver",
@@ -187,7 +185,7 @@ describe("API Routes", () => {
     it("return 422 for post because of invalid information set", (done) => {
       chai.request(server)
       .post("/api/v1/venues")
-      .set('authorization', token)
+      .set('authorization', process.env.TOKEN)
       .send({
         venue_name: "super sweet venue",
         city_name: "denver",
@@ -217,7 +215,7 @@ describe("API Routes", () => {
     it("return 404 for post because venue wanting to be deleted does not exists", (done) => {
       chai.request(server)
       .delete("/api/v1/venues/amorpha")
-      .set('authorization', token)
+      .set('authorization', process.env.TOKEN)
       .end((err, response) => {
         response.should.have.status(404)
         response.body.should.have.property('error')
@@ -229,7 +227,7 @@ describe("API Routes", () => {
     it.skip("return 204 for delete after deleting venue", (done) => {
       chai.request(server)
       .delete("/api/v1/venues/shakedown")
-      .set('authorization', token)
+      .set('authorization', process.env.TOKEN)
       .end((err, response) => {
         console.log(response.body);
         response.should.have.status(204)
@@ -240,7 +238,7 @@ describe("API Routes", () => {
     it("return 404 for post because venue Id wanting to be deleted does not exists", (done) => {
       chai.request(server)
       .delete("/api/v1/venues/id/376543")
-      .set('authorization', token)
+      .set('authorization', process.env.TOKEN)
       .end((err, response) => {
         response.should.have.status(404)
         response.body.should.have.property('error')
@@ -252,7 +250,7 @@ describe("API Routes", () => {
     it.skip("return 204 for delete after deleting venue", (done) => {
       chai.request(server)
       .delete("/api/v1/venues/id/12066")
-      .set('authorization', token)
+      .set('authorization', process.env.TOKEN)
       .end((err, response) => {
         console.log(response.body);
         response.should.have.status(204)
