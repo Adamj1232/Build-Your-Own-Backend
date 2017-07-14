@@ -13,15 +13,15 @@ chai.use(chaiHttp)
 
 describe("API Routes", () => {
 
-  beforeEach((done) => {
-    database.seed.run()
-    done()
-  })
-
   before((done) => {
     database.migrate.latest()
     done()
   });
+
+  beforeEach((done) => {
+    database.seed.run()
+    done()
+  })
 
 
   describe("GET /api/v1/venues", () => {
