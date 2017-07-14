@@ -64,7 +64,7 @@ app.post('/authenticate', (request, response) => {
   }
 
   else {
-    let token = jwt.sign(user, app.get('secretKey'), {
+    var token = jwt.sign(user, app.get('secretKey'), {
       expiresIn: 2025000
     });
 
