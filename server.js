@@ -80,7 +80,7 @@ app.post('/authenticate', (request, response) => {
 app.get('/api/v1/venues/cities/all', (req, res) => {
   database('cities').select()
   .then((cities) => {
-    if(!cities){
+    if(!cities.length){
       res.sendStatus(404).send({
         error: 'No cities by that name with music venues found'
       })
@@ -136,8 +136,7 @@ app.get('/api/v1/venues/cities/name/:city_name', (req, res) => {
   .then((venue) => {
     database('venues').where('city_id', venue[0].id)
     .then((venuesPerCity) => {
-      // console.log(venuesPerCity);
-      if(!venuesPerCity) {
+      if(!venuesPerCity.length) {
         res.status(404).send({
           error: 'No venue was found by that name'
         })
@@ -182,7 +181,7 @@ app.post("/api/v1/venues", checkAuth, (req, res) => {
 
   const expectedReq = ["venue_name", "city_name", "state_name"];
   const missingInfo = expectedReq.every(params => req.body[params]);
-  let newVenue = req.body;
+  var newVenue = req.body;
   if (!missingInfo) {
     return res.status(422).send({
       error: "Missing information from post request body, your request must contain a venue_name, city_name and stat_name to be processed"
