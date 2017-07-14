@@ -60,7 +60,7 @@ describe("API Routes", () => {
         response.should.have.status(200);
         response.should.be.json;
         response.body.should.be.a("array");
-        response.body.length.should.equal(982);
+        response.body.length.should.equal(984);
         response.body[0].should.have.property("id");
         response.body[0].should.have.property("city_name");
         response.body[0].should.have.property("state");
@@ -143,7 +143,7 @@ describe("API Routes", () => {
         response.should.have.status(200);
         response.should.be.json;
         response.body.should.be.a("array");
-        response.body.length.should.equal(2);
+        response.body.length.should.equal(67);
         response.body[1][0].should.have.property("id");
         response.body[1][0].should.have.property("venue_URL");
         response.body[1][0].should.have.property("venue_booking");
