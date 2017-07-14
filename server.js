@@ -18,7 +18,7 @@ app.use(express.static(`${__dirname}/public`))
 app.locals.links = {}
 
 
-if (process.env.NODE_ENV === 'development' && (!config.CLIENT_SECRET || !config.USERNAME || !config.PASSWORD)) {
+if (!config.CLIENT_SECRET || !config.USERNAME || !config.PASSWORD) {
   throw new Error('Either CLIENT_SECRET, USERNAME, or PASSWORD is missing from .env file');
 }
 
