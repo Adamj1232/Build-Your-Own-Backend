@@ -13,15 +13,15 @@ chai.use(chaiHttp)
 
 describe("API Routes", () => {
 
-  before((done) => {
-    database.migrate.latest()
-    done()
-  });
-
   beforeEach((done) => {
     database.seed.run()
     done()
   })
+
+  before((done) => {
+    database.migrate.latest()
+    done()
+  });
 
 
   describe("GET /api/v1/venues", () => {
@@ -158,15 +158,16 @@ describe("API Routes", () => {
 
 
   describe("POST /api/v1/venues", () => {
-    beforeEach((done) => {
-      database.seed.run()
-      done()
-    })
 
     before((done) => {
       database.migrate.latest()
       done()
     });
+
+    beforeEach((done) => {
+      database.seed.run()
+      done()
+    })
 
     it("return 422 for post because of invalid information set", (done) => {
       chai.request(server)
@@ -202,15 +203,16 @@ describe("API Routes", () => {
 
 
   describe("DELETE /api/v1/venues", () => {
-    beforeEach((done) => {
-      database.seed.run()
-      done()
-    })
 
     before((done) => {
       database.migrate.latest()
       done()
     });
+
+    beforeEach((done) => {
+      database.seed.run()
+      done()
+    })
 
     it("return 404 for post because venue wanting to be deleted does not exists", (done) => {
       chai.request(server)
