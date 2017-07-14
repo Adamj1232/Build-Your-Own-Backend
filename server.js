@@ -308,6 +308,7 @@ app.put('/api/v1/venues', checkAuth, (req, res) => {
               city_name: newVenue.city_name
             }, 'id')
             .then((res) => {
+              console.log(res, data[0]);
               database("venues").where('venue_name', data[0].venue_name)
               .update({
                 // venue_name: newVenue.venue_name,
