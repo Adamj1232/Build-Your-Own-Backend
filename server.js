@@ -283,7 +283,7 @@ app.delete('/api/v1/venues/:venue_name', checkAuth, (req, res) => {
 });
 
 
-app.put('/api/v1/venues', checkAuth, (req, res) => {
+app.patch('/api/v1/venues', checkAuth, (req, res) => {
   let newVenue = req.body;
 
   const expectedReq = ["venue_name", "city_name", "state_name"];
@@ -330,6 +330,7 @@ app.put('/api/v1/venues', checkAuth, (req, res) => {
           }
         })
       } else {
+        console.log(data[0])
         database("venues").where('venue_name', data[0].venue_name)
         .update({
           id: data[0].id,
