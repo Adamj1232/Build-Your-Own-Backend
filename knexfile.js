@@ -3,7 +3,7 @@
 module.exports = {
   development: {
     client: 'pg',
-    connection: 'postgres://localhost/venues',
+    connection: 'postgres://localhost/testing',
     migrations: {
       directory: './db/migrations'
     },
