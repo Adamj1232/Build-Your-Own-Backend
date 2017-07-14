@@ -143,7 +143,7 @@ describe("API Routes", () => {
         response.should.have.status(200);
         response.should.be.json;
         response.body.should.be.a("array");
-        response.body.length.should.equal(67);
+        response.body.length.should.equal(2);
         response.body[1][0].should.have.property("id");
         response.body[1][0].should.have.property("venue_URL");
         response.body[1][0].should.have.property("venue_booking");
