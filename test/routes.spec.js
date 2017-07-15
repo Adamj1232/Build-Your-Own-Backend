@@ -58,7 +58,7 @@ describe("API Routes", () => {
         response.should.have.status(200);
         response.should.be.json;
         response.body.should.be.a("array");
-        response.body.length.should.equal(984);
+        response.body.length.should.equal(102);
         response.body[0].should.have.property("id");
         response.body[0].should.have.property("city_name");
         response.body[0].should.have.property("state");
@@ -78,7 +78,7 @@ describe("API Routes", () => {
 
     it("should return the specific venue passed into the url", (done) => {
       chai.request(server)
-      .get("/api/v1/venues/each_venue/mishawaka amphitheatre")
+      .get("/api/v1/venues/each_venue/banter")
       .end((err, response) => {
         response.should.have.status(200);
         response.should.be.json;
@@ -121,7 +121,7 @@ describe("API Routes", () => {
         response.should.have.status(200);
         response.should.be.json;
         response.body.should.be.a("array");
-        response.body.length.should.equal(4);
+        response.body.length.should.equal(2);
         response.body[0].should.have.property("id");
         response.body[0].should.have.property("venue_URL");
         response.body[0].should.have.property("venue_booking");
@@ -141,7 +141,7 @@ describe("API Routes", () => {
         response.should.have.status(200);
         response.should.be.json;
         response.body.should.be.a("array");
-        response.body.length.should.equal(67);
+        response.body.length.should.equal(2);
         response.body[1][0].should.have.property("id");
         response.body[1][0].should.have.property("venue_URL");
         response.body[1][0].should.have.property("venue_booking");
@@ -239,7 +239,7 @@ describe("API Routes", () => {
     //below test works, just skipping for organizational sanity
     it("return 204 for delete after deleting venue", (done) => {
       chai.request(server)
-      .delete("/api/v1/venues/id/12208")
+      .delete("/api/v1/venues/id/11366")
       .set('authorization', process.env.TOKEN)
       .end((err, response) => {
         console.log(response.body);
