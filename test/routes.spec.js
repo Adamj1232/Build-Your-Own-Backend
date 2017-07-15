@@ -78,7 +78,7 @@ describe("API Routes", () => {
 
     it("should return the specific venue passed into the url", (done) => {
       chai.request(server)
-      .get("/api/v1/venues/each_venue/banter")
+      .get("/api/v1/venues/each_venue/Rock-A-Billies")
       .end((err, response) => {
         response.should.have.status(200);
         response.should.be.json;
@@ -239,7 +239,7 @@ describe("API Routes", () => {
     //below test works, just skipping for organizational sanity
     it("return 204 for delete after deleting venue", (done) => {
       chai.request(server)
-      .delete("/api/v1/venues/id/11366")
+      .delete("/api/v1/venues/id/147142")
       .set('authorization', process.env.TOKEN)
       .end((err, response) => {
         console.log(response.body);
