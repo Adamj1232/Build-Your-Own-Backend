@@ -228,7 +228,7 @@ describe("API Routes", () => {
 
     it("return 404 for post because venue Id to be deleted does not exists", (done) => {
       chai.request(server)
-      .delete("/api/v1/venues/id/376543")
+      .delete("/api/v1/delete/venues/376543")
       .set('authorization', process.env.TOKEN)
       .end((err, response) => {
         response.should.have.status(404)
@@ -240,7 +240,7 @@ describe("API Routes", () => {
 
     it("return 204 for delete after deleting venue", (done) => {
       chai.request(server)
-      .delete("/api/v1/venues/id/1159")
+      .delete("/api/v1/delete/venues/1159")
       .set('authorization', process.env.TOKEN)
       .end((err, response) => {
         console.log(response.body);
