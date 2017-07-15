@@ -244,21 +244,21 @@ app.delete('/api/v1/delete/venues/:id', checkAuth, (req, res) => {
 
   const { id } = req.params;
   database('venues').where('id', id).select()
-    .then((resp) => {
-      if (!resp.length) {
-        console.log(resp.body);
-        res.status(404).send({ error: 'Invalid Venue ID' });
-      } else {
-        database('venues').where('id', id).del()
-        .then(() => {
-          res.status(204).send({
-            success: `venue has been deleted`
-          })
+  .then((resp) => {
+    console.log(resp.body);
+    if (!resp.length) {
+      res.status(404).send({ error: 'Invalid Venue ID' });
+    } else {
+      database('venues').where('id', id).del()
+      .then(() => {
+        res.status(204).send({
+          success: `venue has been deleted`
         })
-        .catch((error) => {
-          res.status(500).send({ error });
-        });
-      }
+      })
+      .catch((error) => {
+        res.status(500).send({ error });
+      });
+    }
   });
 });
 
