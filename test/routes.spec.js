@@ -220,7 +220,6 @@ describe("API Routes", () => {
       .delete("/api/v1/venues/aurora")
       .set('authorization', process.env.TOKEN)
       .end((err, response) => {
-        console.log(response.body);
         response.should.have.status(204)
         done()
       })
@@ -238,12 +237,12 @@ describe("API Routes", () => {
       })
     })
 
-    it("return 204 for delete after deleting venue", (done) => {
+    it("return 204 for delete after deleting venue by ID", (done) => {
       chai.request(server)
       .delete("/api/v1/delete/venues/1159")
       .set('authorization', process.env.TOKEN)
       .end((err, response) => {
-        console.log(response.body);
+        console.log(response);
         response.should.have.status(204)
         done()
       })
