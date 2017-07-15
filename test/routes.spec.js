@@ -213,7 +213,7 @@ describe("API Routes", () => {
         done()
       })
     })
-    //below test works, just skipping for organizational sanity
+
     it("return 204 for delete after deleting venue", (done) => {
       chai.request(server)
       .delete("/api/v1/venues/aurora")
@@ -225,7 +225,7 @@ describe("API Routes", () => {
       })
     })
 
-    it("return 404 for post because venue Id wanting to be deleted does not exists", (done) => {
+    it("return 404 for post because venue Id to be deleted does not exists", (done) => {
       chai.request(server)
       .delete("/api/v1/venues/id/376543")
       .set('authorization', process.env.TOKEN)
@@ -236,10 +236,10 @@ describe("API Routes", () => {
         done()
       })
     })
-    //below test works, just skipping for organizational sanity
+
     it("return 204 for delete after deleting venue", (done) => {
       chai.request(server)
-      .delete("/api/v1/venues/id/147142")
+      .delete("/api/v1/venues/id/147136")
       .set('authorization', process.env.TOKEN)
       .end((err, response) => {
         console.log(response.body);
