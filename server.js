@@ -243,6 +243,7 @@ app.post("/api/v1/venues", checkAuth, (req, res) => {
 app.delete('/api/v1/delete/venues/:id', checkAuth, (req, res) => {
 
   const { id } = req.params;
+  console.log(id);
   database('venues').where('id', id).select()
   .then((resp) => {
     console.log(resp.body);
