@@ -118,7 +118,7 @@ describe("API Routes", () => {
       chai.request(server)
       .get("/api/v1/venues/cities/name/arvada")
       .end((err, response) => {
-        console.log(response);
+        console.log(response.body);
         response.should.have.status(200);
         response.should.be.json;
         response.body.should.be.a("array");
