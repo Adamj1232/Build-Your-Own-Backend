@@ -245,7 +245,7 @@ app.delete('/api/v1/venues/id/:id', checkAuth, (req, res) => {
   const { id } = req.params;
   database('venues').where('id', id).select()
     .then((resp) => {
-      if (!resp.length) {
+      if (!res.length) {
         res.status(404).send({ error: 'Invalid Venue ID' });
       } else {
         database('venues').where('id', id).del()
