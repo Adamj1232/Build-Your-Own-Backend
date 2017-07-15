@@ -139,6 +139,7 @@ describe("API Routes", () => {
       chai.request(server)
       .get("/api/v1/venues/all/cities/all/CA")
       .end((err, response) => {
+        console.log(response.body);
         response.should.have.status(200);
         response.should.be.json;
         response.body.should.be.a("array");
@@ -242,7 +243,6 @@ describe("API Routes", () => {
       .delete("/api/v1/delete/venues/1159")
       .set('authorization', process.env.TOKEN)
       .end((err, response) => {
-        console.log(response);
         response.should.have.status(204)
         done()
       })
