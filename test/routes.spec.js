@@ -193,6 +193,14 @@ describe("API Routes", () => {
 
   describe("DELETE /api/v1/venues", () => {
 
+    before((done) => {
+      database.migrate.latest().then(() => done())
+    });
+
+    beforeEach((done) => {
+      database.seed.run().then(() => done())
+    })
+
 
     it("return 404 for post because venue wanting to be deleted does not exists", (done) => {
       chai.request(server)
@@ -206,9 +214,9 @@ describe("API Routes", () => {
       })
     })
     //below test works, just skipping for organizational sanity
-    it.skip("return 204 for delete after deleting venue", (done) => {
+    it("return 204 for delete after deleting venue", (done) => {
       chai.request(server)
-      .delete("/api/v1/venues/shakedown")
+      .delete("/api/v1/venues/aurora")
       .set('authorization', process.env.TOKEN)
       .end((err, response) => {
         console.log(response.body);
@@ -229,9 +237,9 @@ describe("API Routes", () => {
       })
     })
     //below test works, just skipping for organizational sanity
-    it.skip("return 204 for delete after deleting venue", (done) => {
+    it("return 204 for delete after deleting venue", (done) => {
       chai.request(server)
-      .delete("/api/v1/venues/id/12066")
+      .delete("/api/v1/venues/id/12208")
       .set('authorization', process.env.TOKEN)
       .end((err, response) => {
         console.log(response.body);
